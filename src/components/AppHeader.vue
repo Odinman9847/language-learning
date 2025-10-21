@@ -22,7 +22,6 @@ async function handleLogout() {
         <span>{{ store.user.email }}</span>
         <button @click="handleLogout">Logout</button>
       </div>
-      <RouterLink to="/login">Login</RouterLink>
     </nav>
   </header>
 </template>
@@ -60,6 +59,7 @@ nav a {
   font-weight: bold;
   color: #4b4b4b;
   text-decoration: none;
+  padding: 8px;
 }
 
 nav a + a {
