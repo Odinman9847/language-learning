@@ -2,7 +2,14 @@
 import { ref, onMounted } from 'vue'
 import { supabase } from '@/supabase.ts'
 
-const lessons = ref<any[]>([])
+interface Lesson {
+  id: number
+  created_at: string
+  title: string
+  order: number
+}
+
+const lessons = ref<Lesson[]>([])
 
 onMounted(() => {
   const fetchLessons = async () => {
