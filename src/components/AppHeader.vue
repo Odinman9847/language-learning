@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router'
   <header class="app-header">
     <nav>
       <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/login">Login</RouterLink>
     </nav>
   </header>
 </template>
@@ -22,5 +23,9 @@ nav a {
   font-weight: bold;
   color: #4b4b4b;
   text-decoration: none;
+}
+
+nav a + a {
+  margin-left: 1rem;
 }
 </style>
