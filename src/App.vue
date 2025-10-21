@@ -1,13 +1,8 @@
 <script setup lang="ts"></script>
+import { RouterView } from 'vue-router'
 
 <template>
-  <h1>My Language App</h1>
+  <RouterView />
 </template>
 
-<style scoped>
-h1 {
-  font-family: sans-serif;
-  text-align: center;
-  margin-top: 4rem;
-}
-</style>
+<style scoped></style>
