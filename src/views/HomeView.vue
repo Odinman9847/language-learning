@@ -33,6 +33,10 @@ onMounted(() => {
   <div v-if="lessons.length === 0">Loading lessons...</div>
 
   <ul v-else>
-    <li v-for="lesson in lessons" :key="lesson.id">{{ lesson.title }}</li>
+    <li v-for="lesson in lessons" :key="lesson.id">
+      <RouterLink :to="`/lesson/${lesson.id}`">
+        {{ lesson.title }}
+      </RouterLink>
+    </li>
   </ul>
 </template>
