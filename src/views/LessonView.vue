@@ -15,21 +15,28 @@ const questions = ref<Question[]>([])
 const route = useRoute()
 const currentQuestionIndex = ref(0)
 const lessonIsComplete = ref(false)
+const selectedOption = ref<string | null>(null)
+const selectionStatus = ref<'correct' | 'incorrect' | null>(null)
 
 const currentQuestion = computed(() => {
   return questions.value[currentQuestionIndex.value]
 })
 
-function checkAnswer(selectedOption: string) {
+function checkAnswer(option: string) {
   if (!currentQuestion.value) return
+  if (selectionStatus.value !== null) return
+  selectedOption.value = option
   const correctAnswer = currentQuestion.value.answer
 
-  if (selectedOption === correctAnswer) {
-    console.log('Correct!')
+  if (option === correctAnswer) {
+    selectionStatus.value = 'correct'
   } else {
-    console.log('Incorrect!')
+    selectionStatus.value = 'incorrect'
   }
+}
 
+function goToNextQuestion() {
+  if (!currentQuestion.value) return
   const isLastQuestion = currentQuestionIndex.value === questions.value.length - 1
 
   if (isLastQuestion) {
@@ -37,6 +44,9 @@ function checkAnswer(selectedOption: string) {
   } else {
     currentQuestionIndex.value++
   }
+
+  selectedOption.value = null
+  selectionStatus.value = null
 }
 
 onMounted(() => {
@@ -68,9 +78,17 @@ onMounted(() => {
             v-for="(option, index) in currentQuestion.options"
             :key="index"
             @click="checkAnswer(option)"
+            :disabled="selectionStatus !== null"
+            :class="{
+              correct: selectedOption === option && selectionStatus === 'correct',
+              incorrect: selectedOption === option && selectionStatus === 'incorrect',
+            }"
           >
             {{ option }}
           </button>
+        </div>
+        <div class="continue-container" v-if="selectionStatus !== null">
+          <button @click="goToNextQuestion">Continue</button>
         </div>
       </div>
 
@@ -109,5 +127,37 @@ button {
   border: 1px solid #ccc;
   background-color: #fff;
   border-radius: 8px;
+}
+
+button.correct {
+  background-color: #58cc02;
+  color: white;
+  border-color: #58cc02;
+}
+
+button.incorrect {
+  background-color: #ff4b4b;
+  color: white;
+  border-color: #ff4b4b;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.continue-container {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.continue-container button {
+  background-color: #1cb0f6;
+  color: white;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
