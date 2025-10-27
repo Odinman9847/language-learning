@@ -66,9 +66,10 @@ onMounted(() => {
 
 <template>
   <div class="lesson-container">
-    <div v-if="lessonIsComplete">
+    <div v-if="lessonIsComplete" class="lesson-complete-container">
       <h2>Lesson Complete!</h2>
       <p>Great job! You've finished the lesson.</p>
+      <RouterLink to="/" class="btn-primary">Back to Lessons</RouterLink>
     </div>
     <div v-else>
       <div v-if="currentQuestion">
@@ -88,7 +89,7 @@ onMounted(() => {
           </button>
         </div>
         <div class="continue-container" v-if="selectionStatus !== null">
-          <button @click="goToNextQuestion">Continue</button>
+          <button @click="goToNextQuestion" class="btn-primary">Continue</button>
         </div>
       </div>
 
@@ -146,12 +147,27 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.lesson-complete-container {
+  text-align: center;
+}
+
+.lesson-complete-container h2 {
+  color: var(--green-correct);
+  font-size: 2.5rem;
+}
+
+.lesson-complete-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
 .continue-container {
   margin-top: 2rem;
   text-align: center;
 }
 
-.continue-container button {
+.btn-primary {
+  display: inline-block;
   background-color: var(--blue-ui);
   color: var(--text-light);
   padding: 1rem 2.5rem;
@@ -160,5 +176,11 @@ button:disabled {
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
 }
 </style>
