@@ -28,10 +28,10 @@ async function handleLogout() {
 
 <style scoped>
 .app-header {
-  background-color: #ffffff;
+  background-color: var(--test-light);
   padding: 1rem 2rem;
-  border-bottom: 1px solid #e5e5e5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 nav {
@@ -47,8 +47,8 @@ nav {
 }
 
 .user-info button {
-  background-color: #ff4b4b;
-  color: white;
+  background-color: var(--red-incorrect);
+  color: var(--text-light);
   border: none;
   padding: 8px 12px;
   border-radius: 8px;
@@ -57,7 +57,7 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #4b4b4b;
+  color: var(--text-dark);
   text-decoration: none;
   padding: 8px;
 }

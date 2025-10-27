@@ -102,9 +102,9 @@ onMounted(() => {
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #fff;
+  background-color: var(--text-light);
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 h2 {
@@ -113,6 +113,7 @@ h2 {
   font-size: 1.8rem;
   font-weight: 700;
 }
+
 .options-container {
   margin-top: 2rem;
   display: flex;
@@ -124,21 +125,21 @@ button {
   padding: 1rem;
   font-size: 1.2rem;
   cursor: pointer;
-  border: 1px solid #ccc;
-  background-color: #fff;
+  border: 1px solid var(--border-light);
+  background-color: var(--text-light);
   border-radius: 8px;
 }
 
 button.correct {
-  background-color: #58cc02;
-  color: white;
-  border-color: #58cc02;
+  background-color: var(--green-correct);
+  color: var(--text-light);
+  border-color: var(--green-correct);
 }
 
 button.incorrect {
-  background-color: #ff4b4b;
-  color: white;
-  border-color: #ff4b4b;
+  background-color: var(--red-incorrect);
+  color: var(--text-light);
+  border-color: var(--red-incorrect);
 }
 
 button:disabled {
@@ -151,8 +152,8 @@ button:disabled {
 }
 
 .continue-container button {
-  background-color: #1cb0f6;
-  color: white;
+  background-color: var(--blue-ui);
+  color: var(--text-light);
   padding: 1rem 2.5rem;
   border: none;
   border-radius: 12px;
