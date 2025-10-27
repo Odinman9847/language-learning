@@ -84,15 +84,15 @@ onMounted(() => {
 
 <template>
   <div class="lesson-container">
-    <div class="progress-bar-background">
-      <div class="progress-bar-filler" :style="{ width: progressPercentage + '%' }"></div>
-    </div>
     <div v-if="lessonIsComplete" class="lesson-complete-container">
       <h2>Lesson Complete!</h2>
       <p>Great job! You've finished the lesson.</p>
       <RouterLink to="/" class="btn-primary">Back to Lessons</RouterLink>
     </div>
     <div v-else>
+      <div class="progress-bar-background">
+        <div class="progress-bar-filler" :style="{ width: progressPercentage + '%' }"></div>
+      </div>
       <div v-if="currentQuestion">
         <h2>{{ currentQuestion.question_text }}</h2>
         <div class="options-container">
