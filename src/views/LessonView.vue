@@ -22,6 +22,24 @@ const currentQuestion = computed(() => {
   return questions.value[currentQuestionIndex.value]
 })
 
+const progressPercentage = computed(() => {
+  if (questions.value.length === 0) {
+    return 0
+  }
+
+  let answeredCount = currentQuestionIndex.value
+
+  if (selectionStatus.value !== null) {
+    answeredCount++
+  }
+
+  if (lessonIsComplete.value) {
+    answeredCount = questions.value.length
+  }
+
+  return (answeredCount / questions.value.length) * 100
+})
+
 function checkAnswer(option: string) {
   if (!currentQuestion.value) return
   if (selectionStatus.value !== null) return
@@ -66,6 +84,9 @@ onMounted(() => {
 
 <template>
   <div class="lesson-container">
+    <div style="margin-bottom: 1rem; text-align: center; font-weight: bold">
+      Progress: {{ Math.round(progressPercentage) }}%
+    </div>
     <div v-if="lessonIsComplete" class="lesson-complete-container">
       <h2>Lesson Complete!</h2>
       <p>Great job! You've finished the lesson.</p>
