@@ -84,8 +84,8 @@ onMounted(() => {
 
 <template>
   <div class="lesson-container">
-    <div style="margin-bottom: 1rem; text-align: center; font-weight: bold">
-      Progress: {{ Math.round(progressPercentage) }}%
+    <div class="progress-bar-background">
+      <div class="progress-bar-filler" :style="{ width: progressPercentage + '%' }"></div>
     </div>
     <div v-if="lessonIsComplete" class="lesson-complete-container">
       <h2>Lesson Complete!</h2>
@@ -120,6 +120,23 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.progress-bar-background {
+  width: 100%;
+  height: 20px;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.progress-bar-filler {
+  height: 100%;
+  background-color: var(--green-correct);
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
+
 .lesson-container {
   max-width: 600px;
   margin: 2rem auto;
