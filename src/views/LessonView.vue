@@ -14,10 +14,30 @@ interface Question {
 const questions = ref<Question[]>([])
 const route = useRoute()
 const currentQuestionIndex = ref(0)
+const lessonIsComplete = ref(false)
 
 const currentQuestion = computed(() => {
   return questions.value[currentQuestionIndex.value]
 })
+
+function checkAnswer(selectedOption: string) {
+  if (!currentQuestion.value) return
+  const correctAnswer = currentQuestion.value.answer
+
+  if (selectedOption === correctAnswer) {
+    console.log('Correct!')
+  } else {
+    console.log('Incorrect!')
+  }
+
+  const isLastQuestion = currentQuestionIndex.value === questions.value.length - 1
+
+  if (isLastQuestion) {
+    lessonIsComplete.value = true
+  } else {
+    currentQuestionIndex.value++
+  }
+}
 
 onMounted(() => {
   const fetchQuestions = async () => {
@@ -36,16 +56,26 @@ onMounted(() => {
 
 <template>
   <div class="lesson-container">
-    <div v-if="currentQuestion">
-      <h2>{{ currentQuestion.question_text }}</h2>
-      <div class="options-container">
-        <button v-for="(option, index) in currentQuestion.options" :key="index">
-          {{ option }}
-        </button>
-      </div>
+    <div v-if="lessonIsComplete">
+      <h2>Lesson Complete!</h2>
+      <p>Great job! You've finished the lesson.</p>
     </div>
+    <div v-else>
+      <div v-if="currentQuestion">
+        <h2>{{ currentQuestion.question_text }}</h2>
+        <div class="options-container">
+          <button
+            v-for="(option, index) in currentQuestion.options"
+            :key="index"
+            @click="checkAnswer(option)"
+          >
+            {{ option }}
+          </button>
+        </div>
+      </div>
 
-    <div v-else>Loading questions...</div>
+      <div v-else>Loading questions...</div>
+    </div>
   </div>
 </template>
 
