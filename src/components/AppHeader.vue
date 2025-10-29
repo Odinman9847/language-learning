@@ -19,7 +19,7 @@ async function handleLogout() {
       <RouterLink to="/">Home</RouterLink>
       <RouterLink v-if="!store.user" to="/login">Login</RouterLink>
       <div v-else class="user-info">
-        <span>{{ store.user.email }}</span>
+        <RouterLink to="/account">Account</RouterLink>
         <button @click="handleLogout">Logout</button>
       </div>
     </nav>
