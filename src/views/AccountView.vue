@@ -42,12 +42,11 @@ async function updateProfile() {
   try {
     loading.value = true
     const updates = {
-      id: store.user.id,
       username: username.value,
       updated_at: new Date(),
     }
 
-    const { error } = await supabase.from('profiles').upsert(updates)
+    const { error } = await supabase.from('profiles').update(updates).eq('id', store.user.id)
 
     if (error) throw error
     message.value = 'Profile updated successfully!'
